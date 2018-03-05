@@ -1,4 +1,4 @@
-package com.girl.bibicat_data;
+package com.bibicat_data;
 
 import java.io.IOException;
 import org.apache.http.client.ClientProtocolException;
