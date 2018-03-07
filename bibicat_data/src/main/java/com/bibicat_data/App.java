@@ -13,6 +13,7 @@ import org.apache.http.client.ClientProtocolException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import dataBase.AnalysisUitl;
 
 public class App {
 	static Queue<Integer> queue = new ConcurrentLinkedQueue<Integer>();
@@ -26,5 +27,10 @@ public class App {
 //    	System.out.print(links.html());
 //		
     	 
+    	Document doc = Jsoup.connect("http://blog.csdn.net/caimouse/article/details/79434735").get();
+//    	System.out.println(doc.html());
+		Elements links =  doc.select("div.article_content");
+    	System.out.print(AnalysisUitl.getRead_Num(doc));
+        
 	}
 }
