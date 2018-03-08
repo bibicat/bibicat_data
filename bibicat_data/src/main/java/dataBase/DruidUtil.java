@@ -30,7 +30,6 @@ public class DruidUtil {
 		     if(rs.next()){
 		    	 System.out.println(rs.getString("a"));
 		     }
-		    
 		     rs.close();
 		     ps.close();  
 		     con.close();  
@@ -49,7 +48,6 @@ public class DruidUtil {
 		     if(rs.next()){
 		    	 System.out.println(rs.getString("a"));
 		     }
-		    
 		     rs.close();
 		     ps.close();  
 		     con.close();  
