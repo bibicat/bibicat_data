@@ -12,17 +12,19 @@ public class DocumentUtil {
 	 * @param url
 	 * @param proxy
 	 * @return
+	 * @throws IOException 
 	 */
-	public static Document getDocument(String url,Proxy proxy) {
+	public static Document getDocument(String url,Proxy proxy) throws IOException {
 		Document doc = null;
-		try {
-			doc = Jsoup.connect(url)
-						.proxy(proxy)
-						.get();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		doc = Jsoup.connect(url)
+				.header("Accept-Charset", "utf-8")
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.header("accept", "*/*")
+				.header("connection", "Keep-Alive")
+				.header("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)")
+				.proxy(proxy)
+				.timeout(30000)
+				.get();
 		return doc;
 	}
 	
@@ -31,15 +33,17 @@ public class DocumentUtil {
 	 * @param url
 	 * @param proxy
 	 * @return
+	 * @throws IOException 
 	 */
-	public static Document getDocument(String url) {
+	public static Document getDocument(String url) throws IOException {
 		Document doc = null;
-		try {
-			doc = Jsoup.connect(url).get();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		doc = Jsoup.connect(url)
+				.header("Accept-Charset", "utf-8")
+				.header("Content-Type", "application/x-www-form-urlencoded")
+				.header("accept", "*/*")
+				.header("connection", "Keep-Alive")
+				.header("user-agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)")
+				.get();
 		return doc;
 	}
 }
