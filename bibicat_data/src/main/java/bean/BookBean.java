@@ -1,6 +1,6 @@
-package bean.fictionBean;
+package bean;
 
-public class FictionBasicBean {
+public class BookBean {
 
 	protected String title;
 	

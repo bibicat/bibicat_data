@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import org.apache.http.client.ClientProtocolException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -23,11 +22,8 @@ public class App {
 	
     public static void main(String[] args) throws ClientProtocolException, IOException {
 
-    	Document doc = Jsoup.connect("http://www.d3zww.com/book/32/32537/30235685.html").get();
-    	System.out.println(doc.toString());
-    	
-    	
-//    	ExecutorService fixedThreadPool = Executors.newFixedThreadPool(50);
+//    	Document doc = Jsoup.connect("http://www.d3zww.com/book/32/32537/30235685.html").get();
+//    	System.out.println(doc.toString());
 ////    	  for (int i = 0; i < 7000; i++) {
 ////    	   fixedThreadPool.execute(new Runnable() {
 ////    	    public void run() {
