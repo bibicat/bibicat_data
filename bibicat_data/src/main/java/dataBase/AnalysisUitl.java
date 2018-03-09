@@ -2,9 +2,11 @@ package dataBase;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import bean.AgentBean;
 
 public class AnalysisUitl {
 	//内容
@@ -13,6 +15,8 @@ public class AnalysisUitl {
 	private static final String csdn_top = "h1.csdn_top";
 	//阅读数量
 	private static final String read_num = "button.btn-noborder";
+	//端口正则
+	private static final String pattern = "^\\d{1,5}$";
 
 	/**
 	 * 获取博客内容
@@ -57,5 +61,30 @@ public class AnalysisUitl {
 			}
 		}
 		return links;
+	}
+	
+	/**
+	 * 获取代理ip及端口
+	 */
+	public static List<AgentBean> getIpAndPort(Document doc){
+		Elements elements = doc.getElementsByTag("tr");
+		List<AgentBean> agent = new ArrayList<AgentBean>();
+		AgentBean agentBean = null;
+		for(Element ip_port : elements){
+			agentBean = new AgentBean();
+			Elements ip_port_el = ip_port.getElementsByTag("td");
+			for(Element ip_or_port : ip_port_el){	
+				String ip_prot = ip_or_port.text();
+				if(ip_prot.indexOf(".") != -1){
+					agentBean.setIp(ip_prot);
+				}else if(Pattern.matches(pattern, ip_prot)){
+					agentBean.setProt(Integer.valueOf(ip_prot));
+				}
+			}
+			if(null != agentBean.getIp()){
+				agent.add(agentBean);
+			}	
+		}
+		return agent;
 	}
 }
