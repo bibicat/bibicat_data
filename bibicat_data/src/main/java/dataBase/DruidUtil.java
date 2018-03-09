@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import com.alibaba.druid.pool.DruidDataSource;
 import com.alibaba.druid.pool.DruidPooledConnection;
 
+import Config.ConfigUtil;
 import bean.BlogBean;
 
 public class DruidUtil {
@@ -14,10 +15,9 @@ public class DruidUtil {
 	private static final DruidDataSource dataSource = new DruidDataSource();
 	
 	static{
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setUsername("root"); 
-		dataSource.setPassword("Shuyumeng2!");
-		dataSource.setUrl("jdbc:mysql://47.94.19.19:3306/bibicat_data?serverTimezone=UTC"); 
+		dataSource.setUsername(ConfigUtil.getValue("mysql.username")); 
+		dataSource.setPassword(ConfigUtil.getValue("mysql.password"));
+		dataSource.setUrl(ConfigUtil.getValue("mysql.url")); 
 		dataSource.setInitialSize(1); 
 		dataSource.setMinIdle(1); 
 		dataSource.setMaxActive(2);
@@ -51,10 +51,10 @@ public class DruidUtil {
 		DruidPooledConnection con;
 		try {
 			con = dataSource.getConnection();
-			 PreparedStatement ps = con.prepareStatement("select a from a");  
+			 PreparedStatement ps = con.prepareStatement("select blog_title from blog");  
 		     ResultSet rs =  ps.executeQuery();
 		     if(rs.next()){
-		    	 System.out.println(rs.getString("a"));
+		    	 System.out.println(rs.getString("blog_title"));
 		     }
 		     rs.close();
 		     ps.close();  
