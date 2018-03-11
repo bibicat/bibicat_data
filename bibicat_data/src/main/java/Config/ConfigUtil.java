@@ -10,8 +10,9 @@ public class ConfigUtil {
 	private static final Properties prop = new Properties();
 	
 	private static final String profilepath = ConfigUtil.class.getResource("/").getPath()+"config.properties";
-	
+//	private static final String profilepath = "/home/config.properties";
 	static{
+		System.out.println(profilepath);
 		try {
 			prop.load(new FileInputStream(profilepath));
 		} catch (FileNotFoundException e) {

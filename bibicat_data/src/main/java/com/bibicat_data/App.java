@@ -26,9 +26,9 @@ public class App {
     		RedisUtil.sAdd("start_page", String.valueOf(i));
     		System.out.println(i);
     		start_page = D3zwwBookServiceImpl.start_page + i + ".html";
+    		System.out.println(start_page);
     		List<? extends BookBean> bookBeans = a.getBook_links(start_page);
     		a.getChapter_links(bookBeans);
-    		
     	}
 		
 
