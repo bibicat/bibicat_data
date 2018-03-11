@@ -18,6 +18,15 @@ public class RedisUtil {
 	
 	
 	/**
+	 * 删除key
+	 * @param key
+	 * @return
+	 */
+	public static Long del(String key){
+		return jedis.del(key);
+	}
+	
+	/**
 	 * 返回集合中所有成员数量
 	 * @param key
 	 * @return

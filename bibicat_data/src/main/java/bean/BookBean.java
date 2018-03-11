@@ -3,14 +3,22 @@ package bean;
 public class BookBean {
 
 	protected String title;
-	
-	protected String content;
-	
+		
 	protected String link;
 	
 	protected String image_url;
 	
 	protected String author;
+	
+	protected String introduce;
+
+	public String getIntroduce() {
+		return introduce;
+	}
+
+	public void setIntroduce(String introduce) {
+		this.introduce = introduce;
+	}
 
 	public String getTitle() {
 		return title;
@@ -18,14 +26,6 @@ public class BookBean {
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
 	}
 
 	public String getLink() {
@@ -51,6 +51,4 @@ public class BookBean {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	
-	
 }

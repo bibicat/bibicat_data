@@ -1,26 +1,36 @@
 package com.bibicat_data;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.MalformedURLException;
-import java.net.Proxy;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import org.apache.http.client.ClientProtocolException;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import bean.AgentBean;
-import dataBase.AnalysisUitl;
-import dataBase.DocumentUtil;
+import ServiceImpl.D3zwwBookServiceImpl;
+import bean.BookBean;
 import dataBase.RedisUtil;
 
 public class App {
 	
     public static void main(String[] args) throws ClientProtocolException, IOException {
+    	String start_page = RedisUtil.sPop("start_page");
+    	int i = 1;
+    	//从上次一次结束位开始
+    	if(null == start_page) {
+    		start_page = D3zwwBookServiceImpl.start_page + i + ".html";
+    	}else {
+    		i = Integer.valueOf(start_page);
+    		start_page = D3zwwBookServiceImpl.start_page + start_page + ".html";
+    	}
+    	D3zwwBookServiceImpl a = new D3zwwBookServiceImpl();
+    	
+    	for(;;i++) {
+    		RedisUtil.del("start_page");
+    		RedisUtil.sAdd("start_page", String.valueOf(i));
+    		System.out.println(i);
+    		start_page = D3zwwBookServiceImpl.start_page + i + ".html";
+    		List<? extends BookBean> bookBeans = a.getBook_links(start_page);
+    		a.getChapter_links(bookBeans);
+    		
+    	}
+		
 
 //    	Document doc = Jsoup.connect("http://www.d3zww.com/book/32/32537/30235685.html").get();
 //    	System.out.println(doc.toString());
