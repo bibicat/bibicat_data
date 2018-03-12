@@ -1,15 +1,12 @@
 package dataBase;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.Proxy;
 import java.net.URL;
 import java.util.zip.GZIPInputStream;
-
 import org.apache.commons.io.IOUtils;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -51,7 +48,6 @@ public class DocumentUtil {
 	 * @throws IOException 
 	 */
 	public static Document getDocument(String url){
-		BufferedReader br = null;
 		HttpURLConnection connection = null;
 		String html = null;
 		while(null == html) {
@@ -74,14 +70,6 @@ public class DocumentUtil {
 					is = new GZIPInputStream(is);
 				}
 				html = IOUtils.toString(is,"gbk");
-				
-				
-//				br = new BufferedReader(new InputStreamReader(gzip, "utf-8"));
-//				String line;  
-//		        sb = new StringBuilder();  
-//		        while ((line = br.readLine()) != null) {// 循环读取流  
-//		        	sb.append(line);  
-//		        }
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -90,26 +78,6 @@ public class DocumentUtil {
 				connection.disconnect();// 断开连接 
 			}
 		}
-
-//		while(null == doc) {
-//			try {
-//				doc = Jsoup.connect(url)
-//						.header("Accept-Charset", "utf-8")
-//						.header("Content-Type", "application/x-www-form-urlencoded")
-//						.header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
-//						.header("Accept-Language", "zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2")
-//						.header("Accept-Encoding", "gzip, deflate")
-//						.header("Referer", "http://www.d3zww.com/book/112/112906/")
-//						.header("Connection", "Keep-Alive")
-//						.header("Upgrade-Insecure-Requests", "1")
-//						.header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0")
-//						.timeout(30000)
-//						.get();
-//				
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 		return Jsoup.parse(html);
 	}
 	
